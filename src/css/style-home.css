@@ -1,0 +1,439 @@
+.container {
+    width: 100%;
+    height: calc(100vh - 60px);
+    max-width: 1000px;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    scroll-behavior: smooth;
+}
+.container > section { 
+    height: inherit;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+.container > section:nth-child(2) {
+    display: none;
+}
+.container > section::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-categ {
+    width: 100%;
+    min-height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    gap: 10px;
+    position: relative;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+.nav-categ::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 100%;
+    position: fixed;
+    left: 0;
+    background: linear-gradient( to right, var(--bg), #0000);
+}
+.nav-categ::after {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 100%;
+    position: fixed;
+    right: 0;
+    background: linear-gradient( to right, var(--bg), #0000);
+    scale: -1;
+}
+.nav-categ::-webkit-scrollbar {
+    display: none;
+}
+.nav-categ a {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 500;
+    font-size: 90%;
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 30px;
+    white-space: nowrap;
+}
+.nav-categ a:hover {
+    background: var(--hover);
+}
+.nav-categ a:active {
+    background: var(--color1);
+    color: var(--color2);
+}
+.nav-categ a.selected {
+    font-weight: bold;
+    background: var(--title);
+    color: var(--bg);
+}
+
+article.waiting {
+    background: var(--border);
+    opacity: 0.5;
+    pointer-events: none;
+}
+.article.deleted {
+    transition: .3s ease
+}
+article.deleted {
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+}
+article.deleted > * {
+    overflow: hidden
+}
+
+.article button, .post button {
+    background-color: transparent;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+}
+.article button span, .post button span {
+    font-weight: 400;
+    font-size: 20px
+}
+
+.head-user {
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    position: relative;
+}
+.head-user img {
+    height: 35px;
+    aspect-ratio: 1/1;
+    border-radius: 100%;
+    object-fit: cover;
+}
+.user-date {
+    display: flex;
+    flex-direction: column;
+    margin-top: -5px;
+}
+.user-date a {
+    color: var(--title);
+    font-weight: 700;
+    white-space: nowrap;
+}
+.user-date span {
+    width: fit-content;
+    font-size: 80%;
+    font-weight: 500;
+    color: var(--text);
+    padding-top: 1px;
+    white-space: nowrap;
+    cursor: default;
+}
+.user-date span:hover {
+    color: var(--color2)
+}
+.btn-more {
+    margin-left: auto;
+}
+
+.estudios {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    translate: -20px;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+
+.article {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: 250px;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    z-index: 6;
+}
+
+.art-info {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.art-text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+.art-text a[role="h1"] {
+    color: var(--title);
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+    text-wrap: balance;
+}
+.art-text a[role="p"] {
+    font-size: 100%;
+    font-weight: 400;
+    color: var(--text);
+    display: block;
+}
+
+.art-img {
+    min-width: 210px;
+    max-width: 210px;
+    height: 210px;
+    margin-left: auto;
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.art-ctg {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 100%;
+    height: fit-content;
+    display: flex;
+    margin-top: auto;
+}
+.art-ctg span {
+    font-weight: 500;
+    color: var(--bg);
+    height: 100%;
+    padding: 5px 10px;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.posts {
+    background-color: var(--bg);
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    z-index: 96;
+    -ms-overflow-style: none; 
+    scrollbar-width: none;
+}
+
+.post {
+    height: auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: .2s ease-out;
+}
+
+.post-content {
+    color: var(--title);
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+
+.post-content p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 10px;
+}
+
+.post-content img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    max-height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.post-rate-info {
+    display: flex;
+    justify-content: space-between;
+}
+.post-rate-info button {
+    font-size: 14px;
+    height: auto;
+    margin: 0;
+    display: block;
+    aspect-ratio: 0;
+}
+.post-rate-info button:hover, .post-rate-info button:active {
+    background: transparent;
+}
+
+.post-like-counter::after {
+    content: ' Likes';
+}
+.post-comment-counter::after {
+    content: ' Comentarios';
+}
+
+.post-rate-buttons {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+.post-rate-buttons button {
+    height: 35px;
+    border-radius: 20px;
+    flex: 1;
+}
+.post-rate-buttons button:disabled {
+    opacity: 1 !important;
+}
+
+.post-add-comment {
+    overflow: hidden;
+    height: 0;
+    transition: .1s ease;
+}
+.post-add-comment.visible {
+    margin-top: 10px;
+    height: 35px;
+    overflow: visible;
+}
+.post-add-comment form {
+    height: 100%;
+    display: flex;
+    position: relative
+}
+
+.comment {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 100%;
+    display: flex;
+    justify-content: start;
+    gap: 10px;
+    position: relative;
+}
+.comment > img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.comment button {
+    margin-left: auto;
+    padding: 0;
+}
+.comment button span {
+    font-size: 80%;
+}
+.comment-content {
+    background: var(--border);
+    padding: 10px 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.comment-content p {
+    width: 100%;
+    max-width: calc(600px - 124px); /*Menos el padding de todas las cajas, el gap y el ancho de la imagen*/
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.comment-author a {
+    color: var(--title);
+    font-weight: 500;
+}
+.comment-author span {
+    font-size: 80%;
+    color: var(--text);
+    cursor: default;
+}
+.comment-author span:hover {
+    color: var(--color2);
+}
+
+.no-comments {
+    font-weight: 600;
+    color: var(--text);
+    text-align: center;
+}
+
+@media screen and (max-width: 850px) {
+    body::-webkit-scrollbar {
+        display: none
+    }
+    .container {
+        width: 100vw;
+        padding: 0;
+        justify-content: start;
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory
+    }
+    .container::-webkit-scrollbar {
+        display: none;
+    }
+    .container > section {
+        min-width: 100vw;
+        scroll-snap-align: center;
+    }
+    .container > section:first-child {
+        padding-bottom: 60px;
+        position: sticky;
+        left: 0;
+    }
+    .container > section:nth-child(2) {
+        display: flex;
+    }
+    .estudios {
+        translate: 0;
+    }
+    .nav-categ {
+        width: 100%;
+        padding-right: 80px;
+    }
+    .article {
+        border-radius: 0;
+    }
+    .post {
+        padding: 20px;
+    }
+    .post-img {
+        max-height: 60vh
+    }
+    .comment-content p {
+        max-width: calc(100vw - 124px); 
+    }
+}
+@media screen and (max-width: 600px) {
+    .article {
+        height: auto;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column-reverse;
+    }
+    .art-img {
+        min-width: none;
+        width: 100%;
+        min-height: 40vh;
+        border-radius: 16px;
+        overflow: hidden;
+    }
+    .art-ctg {
+        padding-top: 10px
+    }
+}

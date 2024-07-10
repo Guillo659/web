@@ -1,0 +1,164 @@
+#profile-info {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  width: 30%;
+  height: 100vh;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 96;
+  overflow-y: auto;
+  -ms-overflow-style: none; 
+  scrollbar-width: none;
+  text-align: center;
+  text-wrap: pretty
+}
+
+#box-user-photo {
+  position: relative;
+}
+#box-user-photo label {
+  background: var(--bg);
+  color: var(--text);
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1/1;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  translate: -50%;
+}
+#box-user-photo label:hover {
+  background: var(--hover);
+}
+#box-user-photo label:active {
+  background: var(--color1);
+  color: var(--color2);
+}
+#box-user-photo label input {
+  display: none;
+}
+#box-user-photo label span {
+  font-variation-settings: 'FILL' 1;
+  aspect-ratio: 1/1; 
+  cursor: pointer;
+}
+
+#user-photo {
+  width: 100%;
+  padding: 20px;
+  aspect-ratio: 1/1;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+#user-name {
+  cursor: default;
+}
+
+#user-description {
+  color: var(--text);
+  cursor: default;
+}
+
+#btn-edit {
+  font-weight: 700;
+  width: fit-content;
+  height: fit-content;
+  min-height: 40px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-radius: 20px;
+  display: flex;
+  gap: 10px;
+}
+
+#box-profile-photo {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+}
+#box-profile-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 101;
+}
+#box-profile-photo input {
+  width: 100%;
+  height: 210%;
+  position: absolute;
+  left: 0;
+  top: -100%;
+  z-index: 103;
+  opacity: 0;
+  cursor: pointer;
+}
+#box-profile-photo span {
+  font-variation-settings: 'FILL' 1;
+  background: var(--backbox);
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 102;
+  opacity: 0;
+}
+#box-profile-photo:hover span, #box-profile-photo input:focus + span {
+  opacity: 1;
+}
+
+
+#input-name {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  width: 100%;
+  position: relative;
+}
+
+#input-name input {
+  font-weight: bolder;
+  font-size: 20px;
+  background: var(--bg);
+  color: var(--text);
+  width: 100%;
+  padding-right: 30px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+#input-name input:focus {
+  color: var(--title);
+}
+
+#input-name span {
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-content: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 850px) {
+  #profile-info {
+    margin: 0;
+    margin-bottom: 60px;
+    padding: 20px;
+  }
+}

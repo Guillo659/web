@@ -4,12 +4,12 @@ let tmp_ = undefined
 const cache = {
     modal: {},
     posts: null,
-} 
+}
 
 //Retornar un booleano para indicar si se le añadió la clase
 function toggleClass(element, clase) {
     if (element.matches('.' + clase)) {
-        element.classList.remove(clase) 
+        element.classList.remove(clase)
         return false
     } else {
         element.classList.add(clase)
@@ -18,7 +18,7 @@ function toggleClass(element, clase) {
 }
 
 function toggleModal(post) {
-    if (!toggleClass(modal, 'visible')) return 
+    if (!toggleClass(modal, 'visible')) return
 
     cache.modal.form.style.display = 'none'
     cache.modal.formImg.style.display = 'none'
@@ -62,7 +62,7 @@ function toggleModal(post) {
         cache.modal.textarea.style.height = `${ cache.modal.textarea.scrollHeight}px`
         if (cache.modal.formImg.src) cache.modal.formImg.style.display = 'block'
         cache.modal.formBtns.style.display = 'flex'
-        cache.modal.profileImage.src = USER_IMG 
+        cache.modal.profileImage.src = USER_IMG
         cache.modal.name.innerText = USER_NAME
         cache.modal.date.innerText = 'Now'
         cache.modal.date.title = ''
@@ -76,7 +76,7 @@ function popupOptions(parent, userId) {
         floatBox = document.createElement('aside')
         floatBox.className = 'popup-options-box'
         floatBox.innerHTML = `
-        <button aria-label="Report" onclick="alert(18)">
+        <button aria-label="Report" onclick="toggleClassModal('visible')">
             Reportar
             <span aria-hidden="true" class="material-symbols-rounded">report<span>
         </button>
@@ -141,7 +141,7 @@ document.onclick = e => {
             }
         } else {
             const btnChoose = tmp_.parentNode.querySelector('button[aria-label="Choose"]')
-            
+
             if (btnChoose) {
                 if (i.tagName === 'SPAN') {
                     if (!parent.matches('button[aria-label="Choose"]')) {
@@ -161,13 +161,14 @@ document.onclick = e => {
     }
 
     //SI presiono en la imagen de un post, abrir comentarios
-    if (i.matches('.post-img')) { 
-        parent.parentNode.querySelector('button[aria-label="Show comments"]').click() 
+    if (i.matches('.post-img')) {
+        parent.parentNode.querySelector('button[aria-label="Show comments"]').click()
     }
 
     //Only buttons
     if (parent.tagName === 'BUTTON' || parent.tagName === 'A') {
-        i = parent; parent = parent.parentNode
+        i = parent;
+        parent = parent.parentNode
     } else if (i.tagName != 'BUTTON' && i.tagName != 'A') return
 
     const ariaLabel = i.getAttribute('aria-label')
@@ -182,11 +183,11 @@ document.onclick = e => {
     //Si es un boton de la Nav Tools
     if (i.closest('.nav-tools')) {
         parent.querySelector('.selected').classList.remove('selected')
-        
+
         switch (ariaLabel) {
             case 'More':
                 toggleModal()
-            break
+                break
         }
 
         i.classList.add('selected')
@@ -196,14 +197,14 @@ document.onclick = e => {
         switch (ariaLabel) {
             case 'Close':
                 modal.className = ''
-            break
+                break
             case 'Send comment':
                 const box = i.closest('#popup-add-comment')
                 sendComment(box, box.getAttribute('data-post-id'))
-            break
+                break
             case 'Submit':
                 i.closest('article').querySelector('.popup-content').querySelector('form').submit()
-            break
+                break
         }
     } else
     //Si es un boton del post
@@ -217,12 +218,12 @@ document.onclick = e => {
             case 'Like':
                 const likeCounter = post.querySelector('.post-like-counter')
                 likePost(postId, likeCounter, i)
-            break
+                break
             case 'Show comments':
                 toggleModal(post)
                 getComments(postId)
                 cache.modal.addComment.setAttribute('data-post-id', postId)
-            break
+                break
             case 'Add comment':
                 const boxInputComment = post.querySelector('.post-add-comment')
                 if (boxInputComment) {
@@ -233,16 +234,22 @@ document.onclick = e => {
                     btn.disabled = isDisabled
                     if (!isDisabled) input.focus()
                 }
-            break
+                break
             case 'Send comment':
                 sendComment(post, postId)
-            break
+                break
             case 'Options':
+                const id_report = i.getAttribute('data-post-id');
+                //Debe ser un id, procedo a guardarlo en id_post_report
+                if (!isNaN(id_report)) {
+                    //Funcion en reportes.js
+                    id_post_report = id_report;
+                }
                 popupOptions(parent, userId)
-            break
+                break
             case 'Delete':
                 post.querySelector('aside').classList.remove('visible')
-                post.classList.add('waiting')  
+                post.classList.add('waiting')
 
                 const callBackStyle = (success) => {
                     if (success) {
@@ -257,7 +264,7 @@ document.onclick = e => {
 
                 deleteThing(postId, callBackStyle)
         }
-    } else 
+    } else
     //Si es un boton del article
     if (ariaLabel && i.closest('.article')) {
 
@@ -267,17 +274,23 @@ document.onclick = e => {
 
         switch (ariaLabel) {
             case 'Options':
+                const id_report = i.getAttribute('data-article-id');
+                //Debe ser un id, procedo a guardarlo en id_post_report
+                if (!isNaN(id_report)) {
+                    //Funcion en reportes.js
+                    id_post_report = id_report;
+                }
                 popupOptions(parent, userId)
-            break
+                break
             case 'Delete':
                 article.classList.add('waiting')
-        
+
                 const cb = (success) => {
                     if (success) {
                         article.classList.add('deleted')
 
                         let h = getComputedStyle(article).getPropertyValue('height')
-        
+
                         article.style.height = h
 
                         setTimeout(() => { article.style.height = 0 }, 50)
@@ -288,14 +301,14 @@ document.onclick = e => {
                 }
 
                 deleteThing(id, cb)
-            break
+                break
         }
-    } else 
+    } else
     //Si el el choose de crear articles
     if (ariaLabel === 'Choose') {
         const list = parent.querySelector('ul')
-       toggleClass(list, 'visible')
-       tmp_ = list
+        toggleClass(list, 'visible')
+        tmp_ = list
     }
 }
 
@@ -312,22 +325,22 @@ document.onkeydown = e => {
             } else if (i.matches('input[type="file"]')) {
                 i.click()
             } else if (i === cache.modal.textarea) {
-                if(!e.shiftKey) {
+                if (!e.shiftKey) {
                     e.preventDefault()
                     cache.modal.form.querySelector('form').submit()
                 }
             } else if (parent.tagName === 'UL') {
                 i.click()
             }
-        break
+            break
         case 'escape':
             if (modal && modal.matches('.visible')) modal.classList.remove('visible')
             else if (modal && modal.matches('.visible-profile')) modal.classList.remove('visible-profile')
-        break
+            break
         case 'tab':
             setTimeout(() => {
                 if (
-                    modal && modal.matches('.visible') && 
+                    modal && modal.matches('.visible') &&
                     !document.activeElement.closest('#popup')
                 ) {
                     cache.modal.btnClose.focus()
@@ -339,22 +352,22 @@ document.onkeydown = e => {
 document.addEventListener('DOMContentLoaded', () => {
     // Codigo de filtrar por categoria
     const links = document.querySelectorAll('a[data-materia]');
-    
+
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
+
             const materia = this.getAttribute('data-materia');
-            
+
             const xhr = new XMLHttpRequest();
             xhr.open('GET', '../model/cargar_materia.php?materia=' + encodeURIComponent(materia), true);
-            
+
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                     document.getElementById('cantainer_articles').innerHTML = xhr.responseText;
                 }
             };
-            
+
             xhr.send();
         });
     });
@@ -371,14 +384,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const xhr = new XMLHttpRequest();
                 xhr.open("POST", "../model/search.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                
+
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                         const coincidencias = JSON.parse(xhr.responseText);
                         mostrarResultados(coincidencias);
                     }
                 };
-                
+
                 const params = "texto=" + encodeURIComponent(texto);
                 xhr.send(params);
             } else {
@@ -414,13 +427,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const posts = document.querySelector('.posts')
 
     if (window.innerWidth <= 850) {
-        if (container) { 
+        if (container) {
             container.scrollLeft = container.scrollWidth
             if (page.length < 2) setTimeout(() => container.scrollLeft = 0, 1200)
         }
-    } else if (posts) { 
+    } else if (posts) {
         posts.scrollTop = 500
-        setTimeout(() => posts.scrollTop = 0, 1000) 
+        setTimeout(() => posts.scrollTop = 0, 1000)
     }
 
     modal = document.createElement('section')
@@ -515,7 +528,7 @@ document.addEventListener('DOMContentLoaded', () => {
     cache.modal.addComment = modal.querySelector('#popup-add-comment')
     cache.modal.inputComment = modal.querySelector('.input-comment')
     cache.modal.textareaBio = modal.querySelector('textarea[name="profile_bio"]')
-    
+
     const inputFilePost = modal.querySelector('input[name="img-post"]')
     const imageFormPost = cache.modal.form.querySelector('img')
     const inputFileProfile = modal.querySelector('input[name="img-profile"]')
@@ -531,23 +544,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         console.log('joaa')
-        if (this.value.length > 0 || imageFormPost.src) { 
+        if (this.value.length > 0 || imageFormPost.src) {
             cache.modal.btnSubmit.disabled = false
             cache.modal.btnSubmit.classList.add('available')
-        } else { 
-            cache.modal.btnSubmit.disabled = true 
-            cache.modal.btnSubmit.classList.remove('available') 
+        } else {
+            cache.modal.btnSubmit.disabled = true
+            cache.modal.btnSubmit.classList.remove('available')
         }
     }
     inputFilePost.onchange = function() {
-        if (this.files.length > 0) { 
+        if (this.files.length > 0) {
             cache.modal.btnSubmit.disabled = false
             cache.modal.btnSubmit.classList.add('available')
             cache.modal.lastFile = true
         } else {
             if (cache.modal.lastFile) return
-            cache.modal.btnSubmit.disabled = true 
-            cache.modal.btnSubmit.classList.remove('available') 
+            cache.modal.btnSubmit.disabled = true
+            cache.modal.btnSubmit.classList.remove('available')
             return
         }
 
@@ -561,7 +574,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         xhr.onload = () => {
             if (xhr.status === 200) {
-                cache.modal.formImg.src = PATH + xhr.response 
+                cache.modal.formImg.src = PATH + xhr.response
                 cache.modal.formImg.style.display = 'block'
             } else {
                 console.error('Error al cargar la imagen:', xhr.statusText)
@@ -576,31 +589,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (inputFileProfile) {
         inputFileProfile.onchange = function() {
-            if (this.files.length === 0) return 
-    
+            if (this.files.length === 0) return
+
             const file = this.files[0]
             const formData = new FormData()
             formData.append('imagen', file)
-    
+
             const xhr = new XMLHttpRequest();
-    
+
             xhr.open('POST', PATH + 'model/set_image_profile.php')
-    
+
             xhr.onload = () => {
                 if (xhr.status === 200) {
-                    editImageProfile.src = PATH + xhr.response 
+                    editImageProfile.src = PATH + xhr.response
                 } else {
                     console.error('Error al cargar la imagen:', xhr.status)
                 }
             }
-    
+
             xhr.onerror = () => {
                 console.error('Error de red al cargar la imagen')
             }
-    
+
             xhr.send(formData)
         }
-    }   
+    }
 
     document.body.prepend(modal)
 })

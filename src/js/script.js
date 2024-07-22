@@ -1,6 +1,6 @@
 console.log(typeof(USER_IMG))
-let modal;
-let tmp_ ;
+let modal = null;
+let tmp_ = undefined;
 
 if (typeof(USER_IMG) == 'undefined') {
     let USER_IMG = 0

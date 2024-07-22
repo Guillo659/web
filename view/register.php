@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../src/css/style.css">
     <link rel="stylesheet" href="../src/css/style-auth.css">
-    <link rel="shortcut icon" href="../public/images/logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dvdhtdzwp/image/upload/v1721276122/logoico.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <title>Sing Up</title>
 <body>

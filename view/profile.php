@@ -48,7 +48,7 @@ if (isset($_GET['id']) && $_GET['id']) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../public/images/logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dvdhtdzwp/image/upload/v1721276122/logoico.jpg" type="image/x-icon">
     <link rel="stylesheet" href="../src/css/style-profile.css">
     <link rel="stylesheet" href="../src/css/style-home.css">
     <link rel="stylesheet" href="../src/css/style.css">

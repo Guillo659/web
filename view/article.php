@@ -33,7 +33,7 @@ foreach($mobile_agents as $agent) {
     <title>Document</title>
     <link rel="stylesheet" href="../src/css/style-setarticle.css">
     <link rel="stylesheet" href="../src/css/style.css">
-    <link rel="shortcut icon" href="../public/images/logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dvdhtdzwp/image/upload/v1721276122/logoico.jpg" type="image/x-icon">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" /> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../src/js/script.js" defer></script>

@@ -579,6 +579,7 @@
     <script src="src/js/modales.js"></script>
     <script src="src/js/notificacion.js"></script>
     <script src="src/js/post.js"></script>
+    <script src="src/js/script.js"></script>
 </body>
 
 </html>

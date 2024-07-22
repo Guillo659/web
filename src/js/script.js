@@ -1,5 +1,12 @@
-let modal = null
-let tmp_ = undefined
+console.log(typeof(USER_IMG))
+let modal;
+let tmp_ ;
+
+if (typeof(USER_IMG) == 'undefined') {
+    let USER_IMG = 0
+}
+
+console.log(typeof(USER_IMG))
 
 const cache = {
     modal: {},

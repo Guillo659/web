@@ -64,6 +64,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             if(mysqli_stmt_execute($stmt)){
                 header("location: ../view/login.php");
             } else{
+                ?><h1>errorrrrr</h1><?php 
                 echo "Oops! Algo salió mal. Por favor, inténtalo de nuevo más tarde.";
             }
         }

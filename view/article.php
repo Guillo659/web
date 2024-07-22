@@ -209,7 +209,7 @@ foreach($mobile_agents as $agent) {
         url: "../model/subir_articulo.php",
         data: datos,
         success: response => {
-            window.location.href = "http://localhost"
+            window.location.href = "https://phpstack-1304539-4747498.cloudwaysapps.com"
         },
         error: (xhr, status, error) => {
             console.error("Error al guardar el post:", error)

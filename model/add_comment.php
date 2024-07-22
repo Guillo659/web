@@ -41,12 +41,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $content = strip_tags($_POST["comment"]);
 
     // Preparar la consulta SQL para insertar el comentario en la base de datos
-    $sql = "INSERT INTO comentarios (post_id, author, authorid, content) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO comentarios (post_id, author, content) VALUES (?, ?, ?)";
 
     // Preparar la declaración SQL
     if ($stmt = mysqli_prepare($link, $sql)) {
         // Vincular las variables a la declaración preparada como parámetros
-        mysqli_stmt_bind_param($stmt, "isis", $post_id, $author, $userid, $content);
+        mysqli_stmt_bind_param($stmt, "iss", $post_id, $author, $content);
 
         // Ejecutar la declaración
         if (mysqli_stmt_execute($stmt)) {

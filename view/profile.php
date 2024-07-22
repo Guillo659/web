@@ -84,7 +84,7 @@ if (isset($_GET['id']) && $_GET['id']) {
                 <span aria-hidden="true" class="material-symbols-rounded">notifications</span>
             </button>
             <a href="/view/profile.php?id=<?= $_SESSION['usuario_id'] ?>" aria-label="Go profile" class="selected">
-                <img src="<?= $_SESSION['image'] ?>" alt="Profile photo">
+                <img src="../<?=$_SESSION['image'] ?>" alt="Profile photo">
             </a>
         <?php else : ?>
             <a href="/view/login.php" aria-label="Go login" class="selected">

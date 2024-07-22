@@ -7,7 +7,7 @@ if (isset($_GET['post_id'])) {
     $post_id = $_GET['post_id'];
 
     // Consultar la base de datos para obtener los comentarios asociados a la publicación
-    $sql = "SELECT comentarios.*, usuarios.profileimage, usuarios.name as authorname FROM comentarios JOIN usuarios ON comentarios.authorid = usuarios.id WHERE comentarios.post_id = ?";
+    $sql = "SELECT comentarios.*, usuarios.profileimage, usuarios.name as authorname FROM comentarios JOIN usuarios ON comentarios.author = usuarios.username WHERE comentarios.post_id = ?";
     if ($stmt = mysqli_prepare($link, $sql)) {
         mysqli_stmt_bind_param($stmt, "i", $post_id);
         if (mysqli_stmt_execute($stmt)) {

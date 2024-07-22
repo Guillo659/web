@@ -34,7 +34,7 @@ class ReportModel {
             mysqli_stmt_close($query);
             //Mínimo 5 reportes para mandar la notificación y ocultar el posts
             $this->resp['data'] = ['count_report' => $count_report];
-            if ($count_report >= 5) {
+            if ($count_report >= 3) {
                 //Agregamos a la blacklist el post
                 $sql = "INSERT INTO blacklist(post_id, date_created) VALUES(?,?);";
                 $query = mysqli_prepare($link, $sql);

@@ -89,6 +89,40 @@ button {
     cursor: pointer;
 }
 
+.btn-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 17px;
+}
+
+.color-text {
+    color: var(--text);
+}
+
+.justify-between {
+    justify-content: space-between !important;
+}
+
+.text-complete {
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+    overflow: hidden;
+}
+
+button.review {
+    border: none !important;
+    aspect-ratio: 0 !important;
+    border-radius: 10px;
+    background-color: #272053;
+    width: 97%;
+    padding: 8px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: bold;
+    font-size: large;
+}
+
 button:hover {
     background: var(--hover);
 }

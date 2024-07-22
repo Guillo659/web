@@ -88,10 +88,10 @@
                     mysqli_stmt_bind_result($stmt, $profile_image);
                     if (mysqli_stmt_fetch($stmt)) {
                         mysqli_stmt_close($stmt);
-                        $_SESSION['image'] = $profile_image;
-                        return $profile_image;
+                        $_SESSION['image'] = file_exists($profile_image) ? $profile_image : "/public/images/pred.jpeg";
+                        return file_exists($profile_image) ? $profile_image : "/public/images/pred.jpeg";
                     } else {
-                        $profile_image = "public/images/pred.jpeg";
+                        $profile_image = "/public/images/pred.jpeg";
                         return $profile_image;
                     }
                 }
@@ -152,7 +152,7 @@
                 <button aria-label="More">
                     <span aria-hidden="true" class="material-symbols-rounded">add</span>
                 </button>
-                <button aria-label="Notifications">
+                <button aria-label="Notifications" onclick="mostrarNotificacionesSinLeer();">
                     <span aria-hidden="true" class="material-symbols-rounded">notifications</span>
                 </button>
                 <a href="/view/profile.php?id=<?= $_SESSION['usuario_id'] ?>" aria-label="Go profile">
@@ -236,7 +236,7 @@
                                 <article class="article" data-article-id="<?= $row["id"] ?>">
                                     <section class="art-info">
                                         <div class="head-user" data-user-id="<?= $row["user_id"] ?>">
-                                            <img src="<?= $row["profileimage"] ?>" alt="Profile image">
+                                            <img src="<?= file_exists($row["profileimage"]) ? $row["profileimage"] : "/public/images/pred.jpeg"; ?>" alt="Profile image">
                                             <div class="user-date">
                                                 <a <?php if ($classRole) echo "class='$classRole'" ?> role="h2" href="view/profile.php?id=<?= $row["user_id"] ?>"><?= $row["name"] ?></a>
                                                 <span title="<?= date(" D · g:i A ", strtotime($row['date_created'])) ?>"><?= $day, date($formato_fecha, strtotime($row['date_created'])); ?></span>
@@ -326,7 +326,7 @@
                 ?>
                         <article class="post" data-post-id="<?= $row['id'] ?>">
                             <section class="head-user" data-user-id="<?= $row["user_id"] ?>">
-                                <img src="<?= $row["profileimage"] ?>" alt="Profile image">
+                                <img src="<?= file_exists($row["profileimage"]) ? $row["profileimage"] : "/public/images/pred.jpeg"; ?>" alt="Profile image">
                                 <div class="user-date">
                                     <a href="view/profile.php?id=<?= $row["user_id"] ?>">
                                         <?= $row["name"] ?>
@@ -576,7 +576,9 @@
         const USER_IMG = "<?= isset($_SESSION['image']) ? $_SESSION['image'] : 0 ?>";
     </script>
     <script src="src/js/reportes.js"></script>
+    <script src="src/js/modales.js"></script>
     <script src="src/js/notificacion.js"></script>
+    <script src="src/js/post.js"></script>
 </body>
 
 </html>

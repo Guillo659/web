@@ -83,6 +83,78 @@ class ReportModel {
         return json_encode($this->resp);
     }
 
+    public function obtenerReportes() {
+        try {
+            global $link;
+            $sql = "WITH RankedReports AS (
+                        SELECT
+                            report.id AS report_id,
+                            report.post_id,
+                            report.reason,
+                            report.date_created AS report_date_created,
+                            posts.title AS post_title,
+                            posts.content AS post_content,
+                            posts.date_created AS post_date_created,
+                            posts.imagen AS post_imagen,
+                            posts.materia AS post_materia,
+                            posts.publictype,
+                            usuarios.id AS usuario_id,
+                            usuarios.name AS usuario_name,
+                            usuarios.prole AS usuario_prole,
+                            usuarios.profileimage AS usuario_imagen,
+                            ROW_NUMBER() OVER (PARTITION BY report.post_id ORDER BY report.date_created DESC) AS rn
+                        FROM report
+                        INNER JOIN posts ON report.post_id = posts.id
+                        INNER JOIN usuarios ON posts.authorid = usuarios.id
+                    )
+                    SELECT
+                        report_id,
+                        post_id,
+                        reason,
+                        report_date_created,
+                        post_title,
+                        post_content,
+                        post_date_created,
+                        post_imagen,
+                        post_materia,
+                        publictype,
+                        usuario_id,
+                        usuario_name,
+                        usuario_prole,
+                        usuario_imagen
+                    FROM RankedReports
+                    WHERE rn = 1;";
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_execute($stmt);
+            $this->resp['data'] = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+        } catch (Exception $e) {
+            $this->resp['error'] = true;
+            $this->resp['message'] = 'Error al obtener los reportes';
+            $this->resp['ex'] = $e->getMessage();
+        }
+        return json_encode($this->resp);
+    }
+
+    public function obtenerReporteByPosts() {
+        $this->resetResponse();
+        global $link;
+        $post_id = intval($_POST['post_id']);
+        try {
+            $sql = "SELECT report.id AS 'report_id', report.post_id, report.usuario_id, report.reason, report.date_created AS 'report_date_created', usuarios.name AS 'usuario_name', usuarios.profileimage AS 'usuario_imagen', usuarios.prole AS 'usuario_prole', posts.visibility AS 'post_visibility' FROM report INNER JOIN usuarios ON report.usuario_id=usuarios.id INNER JOIN posts ON report.post_id=posts.id WHERE report.post_id=?;";
+            $stmt = mysqli_prepare($link, $sql);
+            mysqli_stmt_bind_param($stmt, "i", $post_id);
+            mysqli_stmt_execute($stmt);
+            $this->resp['data'] = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+            mysqli_stmt_close($stmt);
+        } catch (Exception $e) {
+            $this->resp['error'] = true;
+            $this->resp['message'] = 'Error al obtener los reportes del post';
+            $this->resp['ex'] = $e->getMessage();
+        }
+        return json_encode($this->resp);
+    }
+
     public function resetResponse() {
         $this->resp = ['error' => false, 'message' => '', 'data' => [], 'ex' => null, 'is_add_blacklist' => false];
     }

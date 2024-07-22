@@ -7,6 +7,14 @@ switch ($action) {
         echo $reportModel->reportar();
         break;
 
+    case 'obtener_reportes':
+        echo $reportModel->obtenerReportes();
+        break;
+
+    case 'obtener_reportes_post':
+        echo $reportModel->obtenerReporteByPosts();
+        break;
+
     default:
         echo json_encode(['error' => true, 'message' => 'Acción inválida', 'data' => []]);
         break;

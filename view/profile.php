@@ -61,7 +61,7 @@ if (isset($_GET['id']) && $_GET['id']) {
     <main>
         <header>
             <nav>
-                <img src="../public/images/logo.webp" alt="icon page">
+                <img src="https://res.cloudinary.com/dvdhtdzwp/image/upload/c_crop,g_auto,h_800,w_800/logo.jpg" alt="icon page">
                 <div class="div-search">
                     <span aria-hidden="true" class="material-symbols-rounded">search</span>
                     <input id="search" type="text" placeholder="Search">

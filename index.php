@@ -62,6 +62,7 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['usuario_id'] = $row['id'];
+                $role = $row['role'];
                 if ($row['role']) {
                     $sudo = true;
                 }

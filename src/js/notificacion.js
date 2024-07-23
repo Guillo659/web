@@ -23,8 +23,8 @@ async function mostrarNotificacionesSinLeer() {
         await response.json().then(data => {
             const section = document.querySelector('section.posts');
             if (section) {
-                section.innerHTML = '';
                 if (data.data.length > 0) {
+                    section.innerHTML = '';
                     data.data.forEach(async notificacion => {
                         let rutaImg = 'null';
                         if (notificacion.usuario_imagen != null) {
@@ -60,7 +60,9 @@ async function mostrarNotificacionesSinLeer() {
                     </article>`;
                     });
                 } else {
-                    section.innerHTML += `<h2>No hay notificaciones sin leer.</h2>`;
+                    if (!data.error) {
+                        section.innerHTML += `<h2>No hay notificaciones sin leer.</h2>`;
+                    }
                 }
             }
         }).catch(error => {

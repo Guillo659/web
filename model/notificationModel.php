@@ -43,9 +43,10 @@ class NotificationModel {
     }
 
     public function getNotificationsUnreaded() {
-        try {
-            global $link;
-            $sql = "SELECT
+        if (intval($_SESSION['role']) == 1) {
+            try {
+                global $link;
+                $sql = "SELECT
               usuarios.id AS 'usuario_id',
               usuarios.name AS 'usuario_name',
               usuarios.prole AS usuario_prole,
@@ -62,14 +63,18 @@ class NotificationModel {
               posts.publictype
               FROM notification INNER JOIN posts ON notification.post_id=posts.id INNER JOIN usuarios ON posts.authorid=usuarios.id
               WHERE is_read = 0 ORDER BY notificacion_date_created ASC;";
-            $stmt = mysqli_prepare($link, $sql);
-            mysqli_stmt_execute($stmt);
-            $this->resp['data'] = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
-            mysqli_stmt_close($stmt);
-        } catch (Exception $e) {
+                $stmt = mysqli_prepare($link, $sql);
+                mysqli_stmt_execute($stmt);
+                $this->resp['data'] = mysqli_fetch_all(mysqli_stmt_get_result($stmt), MYSQLI_ASSOC);
+                mysqli_stmt_close($stmt);
+            } catch (Exception $e) {
+                $this->resp['error'] = true;
+                $this->resp['message'] = 'Error al obtener las notificaciones no leidas';
+                $this->resp['ex'] = $e->getMessage();
+            }
+        } else {
             $this->resp['error'] = true;
-            $this->resp['message'] = 'Error al obtener las notificaciones no leidas';
-            $this->resp['ex'] = $e->getMessage();
+            $this->resp['message'] = 'No tiene permisos para acceder a esta información';
         }
         return json_encode($this->resp);
     }

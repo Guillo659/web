@@ -349,7 +349,7 @@ document.onkeydown = e => {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async() => {
     // Codigo de filtrar por categoria
     const links = document.querySelectorAll('a[data-materia]');
 
@@ -427,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let resultadosDiv = document.querySelector("#answer>.container-answer");
 
     if (textoInput) {
-        textoInput.oninput = () => {
+        textoInput.oninput = async() => {
             const texto = textoInput.value;
 
             if (texto.length > 0) {
@@ -435,10 +435,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 xhr.open("POST", "../model/search.php", true);
                 xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
-                xhr.onreadystatechange = function() {
+                xhr.onreadystatechange = async function() {
                     if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                        const coincidencias = JSON.parse(xhr.responseText);
-                        mostrarResultados(coincidencias);
+                        const coincidencias = await JSON.parse(xhr.responseText);
+                        await mostrarResultados(coincidencias);
                     }
                 };
 
@@ -450,7 +450,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function mostrarResultados(coincidencias) {
+    async function mostrarResultados(coincidencias) {
         if (resultadosDiv) {
             resultadosDiv.innerHTML = "";
             coincidencias.forEach(async coincidencia => {

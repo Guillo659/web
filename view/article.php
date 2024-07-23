@@ -212,7 +212,7 @@ foreach($mobile_agents as $agent) {
             window.location.href = "https://phpstack-1304539-4747498.cloudwaysapps.com"
         },
         error: (xhr, status, error) => {
-            console.error("Error al guardar el post:", error)
+            window.location.href = "https://phpstack-1304539-4747498.cloudwaysapps.com"
         }
     })
     }

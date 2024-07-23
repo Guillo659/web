@@ -1,5 +1,5 @@
-let modal = null
-let tmp_ = undefined
+let modal = null;
+let tmp_ = undefined;
 
 const cache = {
     modal: {},

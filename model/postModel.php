@@ -14,9 +14,9 @@ class PostModel {
             $post_id = intval($_POST['post_id']);
             $visibility = intval($_POST['visibility']);
             global $link;
-            $sql = "UPDATE posts SET visibility=? WHERE id =?;";
+            $sql = "UPDATE posts SET visibility=1 WHERE id =?;";
             $stmt = mysqli_prepare($link, $sql);
-            mysqli_stmt_bind_param($stmt, "ii", $visibility, $post_id);
+            mysqli_stmt_bind_param($stmt, "i", $post_id);
             mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
             $this->resp['message'] = 'Visibilidad del post cambiada correctamente';

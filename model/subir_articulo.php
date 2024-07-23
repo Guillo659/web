@@ -26,7 +26,7 @@ if ($stmt_insertar_post->execute()) {
     $post_id = $stmt_insertar_post->insert_id;
 
     // Preparar la consulta SQL para insertar los datos en la tabla contentPost
-    $sql_insertar_content = "INSERT INTO contentPost (post_id, title, content, materia) VALUES (?, ?, ?, ?)";
+    $sql_insertar_content = "INSERT INTO contentpost (post_id, title, content, materia) VALUES (?, ?, ?, ?)";
     $stmt_insertar_content = $link->prepare($sql_insertar_content);
     $stmt_insertar_content->bind_param("isss", $post_id, $titulo, $all, $materia);
 

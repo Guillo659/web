@@ -48,7 +48,7 @@ if (isset($_GET['id']) && $_GET['id']) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../public/images/logo.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="https://res.cloudinary.com/dvdhtdzwp/image/upload/v1721276122/logoico.jpg" type="image/x-icon">
     <link rel="stylesheet" href="../src/css/style-profile.css">
     <link rel="stylesheet" href="../src/css/style-home.css">
     <link rel="stylesheet" href="../src/css/style.css">
@@ -61,7 +61,7 @@ if (isset($_GET['id']) && $_GET['id']) {
     <main>
         <header>
             <nav>
-                <img src="../public/images/logo.webp" alt="icon page">
+                <img src="https://res.cloudinary.com/dvdhtdzwp/image/upload/c_crop,g_auto,h_800,w_800/logo.jpg" alt="icon page">
                 <div class="div-search">
                     <span aria-hidden="true" class="material-symbols-rounded">search</span>
                     <input id="search" type="text" placeholder="Search">
@@ -84,7 +84,7 @@ if (isset($_GET['id']) && $_GET['id']) {
                 <span aria-hidden="true" class="material-symbols-rounded">notifications</span>
             </button>
             <a href="/view/profile.php?id=<?= $_SESSION['usuario_id'] ?>" aria-label="Go profile" class="selected">
-                <img src="<?= $_SESSION['image'] ?>" alt="Profile photo">
+                <img src="../<?=$_SESSION['image'] ?>" alt="Profile photo">
             </a>
         <?php else : ?>
             <a href="/view/login.php" aria-label="Go login" class="selected">

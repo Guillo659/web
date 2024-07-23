@@ -19,6 +19,7 @@ if(isset($_POST['profile_name']) && isset($_POST['profile_bio'])) {
     $nombre = strip_tags($_POST['profile_name']);
     $bio = strip_tags($_POST['profile_bio']);
     $image = isset($_SESSION['image_profile']) ? $_SESSION['image_profile'] : $usuario_actual['profileimage'];
+    $path = 'public/uploads/' . basename($image);
 
     // Comprobar si los datos son diferentes
     if($usuario_actual['name'] != $nombre || $usuario_actual['bio'] != $bio || $usuario_actual['profileimage'] != $image) {
@@ -26,7 +27,7 @@ if(isset($_POST['profile_name']) && isset($_POST['profile_bio'])) {
         if (isset($_SESSION['image_profile'])) {
             $sql = "UPDATE usuarios SET name = ?, bio = ?, profileimage = ? WHERE id = ?";
             $stmt = $link->prepare($sql);
-            $stmt->bind_param("sssi", $nombre, $bio, $image, $usuario_id);
+            $stmt->bind_param("sssi", $nombre, $bio, $path, $usuario_id);
             unset($_SESSION['image_profile']);
         } else {
             $sql = "UPDATE usuarios SET name = ?, bio = ? WHERE id = ?";

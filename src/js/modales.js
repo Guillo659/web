@@ -1,12 +1,14 @@
 let modal_report = HTMLElement;
+let resetContentModal = false;
 
 /**
  * 
  * @param {string} clase Nombre de la clase a quitar o agregar al modal
  * @param {boolean} resetContentModal Reinicia el contenido del modal solo cuando se está viendo el reporte de una publicación
  */
-function toggleClassModal(clase = 'visible', resetContentModal = false) {
+function toggleClassModal(clase = 'visible') {
     if (modal_report) {
+        //Cuando resetContentModal es true, es porque se estaba viendo los reportes de una publicación
         if (resetContentModal) {
             modal_report.innerHTML = `
             <article class="popup">
@@ -64,7 +66,7 @@ window.onload = () => {
         <article class="popup">
             <section class="popup-bar-top">
                 <h1 class="title">Reportar publicación</h1>
-                <button id="btn_close_report" onclick="toggleClassModal('visible', true)" aria-label="Close">
+                <button id="btn_close_report" onclick="toggleClassModal('visible')" aria-label="Close">
                     <span aria-hidden="true" class="material-symbols-rounded">close</span>
                 </button>
             </section>

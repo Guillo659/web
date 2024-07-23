@@ -19,10 +19,14 @@
         <header>
             <nav>
                 <img src="public/images/logo.webp" alt="icon page">
-                <div class="div-search">
-                    <span class="material-symbols-rounded">search</span>
-                    <input id="search" type="text" placeholder="Search">
-                    <div id="answer"></div>
+                <div class="div-search flex-column">
+                    <div class="criterio">
+                        <span class="material-symbols-rounded">search</span>
+                        <input id="search" type="text" placeholder="Search">
+                    </div>
+                    <div id="answer">
+                        <div class="container-answer"></div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -177,7 +181,7 @@
                     if ($resultado->num_rows > 0) {
                         $counter = 0;
                     ?>
-                        <a href="#" class="selected">Para ti</a>
+                        <a href="#" data-materia="todas" class="selected">Para ti</a>
                     <?php
                         while ($fila = $resultado->fetch_assoc()) {
                             if ($fila['materia']) {
@@ -275,7 +279,12 @@
                                     <?php
                                     $tmp_art_id = $row['id'];
                                     if ($row["imagen"] != 0 && $row['imagen'] != "public/0") : ?>
-                                        <img class="art-img" src="<?= $row['imagen'] ?>" alt="Post image">
+                                        <?php $ruta = str_replace('..', '', $row['imagen']); ?>
+                                        <?php if (file_exists($ruta)) { ?>
+                                            <img class="art-img" src="<?= $ruta ?>" alt="Post image">
+                                        <?php } else { ?>
+                                            <img class="art-img" title="No se encontró el archivo" src="/public/images/img-load-failed.png" alt="Post image">
+                                        <?php } ?>
                                     <?php endif ?>
                                 </article>
                     <?php

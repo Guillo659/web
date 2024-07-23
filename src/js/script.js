@@ -356,7 +356,8 @@ document.addEventListener('DOMContentLoaded', () => {
     links.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-
+            links.forEach(link => link.classList.remove('selected'));
+            link.classList.add('selected');
             const materia = this.getAttribute('data-materia');
 
             const xhr = new XMLHttpRequest();
@@ -364,7 +365,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                    document.getElementById('cantainer_articles').innerHTML = xhr.responseText;
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        if (data.length > 0) {
+                            const container = document.getElementById('cantainer_articles');
+                            container.innerHTML = '';
+                            data.forEach(async articulo => {
+                                let rutaImg = 'null';
+                                if (articulo.profileimage != null) {
+                                    rutaImg = articulo.profileimage.startsWith('..') ? articulo.profileimage.substring(2) : articulo.profileimage;
+                                }
+                                const existImgProfile = await checkFileExists(rutaImg);
+                                const dateReport = new Date(articulo.date_created);
+                                let art = `
+                                <article class="article" data-article-id="${articulo.id}">
+                                    <section class="art-info">
+                                        <div class="head-user" data-user-id="${articulo.user_id}">
+                                            <img src="${existImgProfile ? rutaImg:'/public/images/pred.jpeg'}" alt="Profile image">
+                                            <div class="user-date">
+                                                <a class="${classRol[articulo.prole]}" role href="/view/profile.php?id=${articulo.user_id}" target="_blank">${articulo.name}</a>
+                                                <span title="${dateReport.toLocaleDateString('en-us',optionsDateDay)}, ${dateReport.toLocaleDateString('en-us',optionsDateHours)}">${dateReport.toLocaleDateString('en-us',optionsDate)}</span>
+                                            </div>
+                                            <button class="btn-more" aria-label="Options" data-article-id="${articulo.id}">
+                                                <span aria-hidden="true" class="material-symbols-rounded">more_horiz</span>
+                                            </button>
+                                        </div>
+                                        <div class="art-text">
+                                            <a role="h1" href="view/view.php?id=${articulo.id}">${articulo.title}</a>
+                                            <a role="p" tabindex="-1" href="view/view.php?id=${articulo.id}">
+                                                ${articulo.content}
+                                            </a>
+                                        </div>
+                                        <div class="art-ctg">
+                                            <span class="${classMateria[articulo.materia]}">${articulo.materia}</span>
+                                        </div>
+                                    </section>
+                            `;
+                                if (articulo.imagen != null && articulo.imagen != "" && articulo.imagen != "0") {
+                                    const rutaPost = articulo.imagen.startsWith('..') ? articulo.imagen.substring(2) : articulo.imagen;
+                                    const existImg = await checkFileExists(rutaPost);
+                                    console.log('post img', existImg);
+                                    art += `<img class="art-img" src="${existImg ? rutaPost:'/public/images/img-load-failed.png'}" alt="Post image">`;
+                                }
+                                art += "</article>";
+                                container.innerHTML += art;
+                            });
+                        }
+
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
             };
 
@@ -374,7 +424,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Fin filtrar por categoria
     // Aquí comienza el codigo de la busqueda
     const textoInput = document.getElementById("search");
-    const resultadosDiv = document.getElementById("answer");
+    let resultadosDiv = document.querySelector("#answer>.container-answer");
 
     if (textoInput) {
         textoInput.oninput = () => {
@@ -401,16 +451,50 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function mostrarResultados(coincidencias) {
-        let html = "";
+        if (resultadosDiv) {
+            resultadosDiv.innerHTML = "";
 
-        coincidencias.forEach(function(coincidencia) {
-            html += `<p>ID: ${coincidencia.id}</p>`;
-            html += `<p>Título: ${coincidencia.title}</p>`;
-            html += `<p>Contenido: ${coincidencia.content}</p>`;
-            html += "<hr>";
-        });
-
-        resultadosDiv.innerHTML = html;
+            coincidencias.forEach(async coincidencia => {
+                let rutaImg = 'null';
+                if (coincidencia.profileimage != null) {
+                    rutaImg = coincidencia.profileimage.startsWith('..') ? coincidencia.profileimage.substring(2) : coincidencia.profileimage;
+                }
+                let existImgProfile = await checkFileExists(rutaImg);
+                let dateReport = new Date(coincidencia.date_created);
+                let art = `
+                <article class="article" data-article-id="${coincidencia.id}">
+                    <section class="art-info">
+                        <div class="head-user" data-user-id="${coincidencia.user_id}">
+                            <img src="${existImgProfile ? rutaImg:'/public/images/pred.jpeg'}" alt="Profile image">
+                            <div class="user-date">
+                                <a class="${classRol[coincidencia.prole]}" role href="/view/profile.php?id=${coincidencia.user_id}" target="_blank">${coincidencia.name}</a>
+                                <span title="${dateReport.toLocaleDateString('en-us',optionsDateDay)}, ${dateReport.toLocaleDateString('en-us',optionsDateHours)}">${dateReport.toLocaleDateString('en-us',optionsDate)}</span>
+                            </div>
+                            <button class="btn-more" aria-label="Options" data-article-id="${coincidencia.id}">
+                                <span aria-hidden="true" class="material-symbols-rounded">more_horiz</span>
+                            </button>
+                        </div>
+                        <div class="art-text">
+                            <a role="h1" href="view/view.php?id=${coincidencia.id}">${coincidencia.title}</a>
+                            <a role="p" tabindex="-1" href="view/view.php?id=${coincidencia.id}">
+                                ${coincidencia.post_content}
+                            </a>
+                        </div>
+                        <div class="art-ctg">
+                            <span class="${classMateria[coincidencia.materia]}">${coincidencia.materia}</span>
+                        </div>
+                    </section>
+            `;
+                if (coincidencia.imagen != null && coincidencia.imagen != "" && coincidencia.imagen != "0") {
+                    let rutaPost = coincidencia.imagen.startsWith('..') ? coincidencia.imagen.substring(2) : coincidencia.imagen;
+                    let existImg = await checkFileExists(rutaPost);
+                    console.log('post img', existImg);
+                    art += `<img class="art-img" src="${existImg ? rutaPost:'/public/images/img-load-failed.png'}" alt="Post image">`;
+                }
+                art += "</article>";
+                resultadosDiv.innerHTML += art;
+            });
+        }
     }
     // Aquí culmina el codigo de la busqueda
 

@@ -143,6 +143,8 @@ async function buscarReportesByPosts(post = null, notificacion_id = null) {
                     </div>
                     `;
                     //Mostramos el modal
+                    //Para reiniciar el contenido del modal cuándo se cierre
+                    resetContentModal = true;
                     toggleClassModal('visible');
                 }
 

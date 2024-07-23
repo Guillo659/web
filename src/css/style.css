@@ -236,6 +236,10 @@ textarea::-webkit-scrollbar {
     transition: width .3s ease
 }
 
+#answer span {
+    color: var(--bg);
+}
+
 .nav-tools {
     background: var(--bg);
     width: 100%;

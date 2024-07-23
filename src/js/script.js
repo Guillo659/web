@@ -453,7 +453,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function mostrarResultados(coincidencias) {
         if (resultadosDiv) {
             resultadosDiv.innerHTML = "";
-
             coincidencias.forEach(async coincidencia => {
                 let rutaImg = 'null';
                 if (coincidencia.profileimage != null) {
@@ -484,11 +483,10 @@ document.addEventListener('DOMContentLoaded', () => {
                             <span class="${classMateria[coincidencia.materia]}">${coincidencia.materia}</span>
                         </div>
                     </section>
-            `;
+                `;
                 if (coincidencia.imagen != null && coincidencia.imagen != "" && coincidencia.imagen != "0") {
                     let rutaPost = coincidencia.imagen.startsWith('..') ? coincidencia.imagen.substring(2) : coincidencia.imagen;
                     let existImg = await checkFileExists(rutaPost);
-                    console.log('post img', existImg);
                     art += `<img class="art-img" src="${existImg ? rutaPost:'/public/images/img-load-failed.png'}" alt="Post image">`;
                 }
                 art += "</article>";

@@ -164,6 +164,7 @@ async function checkFileExists(url = null) {
     if (url != null) {
         return await fetch(url, {
             method: 'HEAD',
+            mode: 'no-cors'
         }).then(response => {
             return response.ok;
         }).catch(() => {

@@ -61,7 +61,7 @@ async function mostrarNotificacionesSinLeer() {
                     });
                 } else {
                     if (!data.error) {
-                        section.innerHTML += `<h2>No hay notificaciones sin leer.</h2>`;
+                        section.innerHTML = '<h2>No hay notificaciones sin leer.</h2>';
                     }
                 }
             }

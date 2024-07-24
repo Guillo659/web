@@ -164,6 +164,11 @@
                     <img src="<?= $_SESSION['image'] ?>" alt="Profile photo">
                 </a>
             <?php else : ?>
+                <a href="/view/find_access.php" target="_blank" title="Buscar mi contraseña" rel="noopener noreferrer">
+                    <span class="material-symbols-rounded">
+                        policy
+                    </span>
+                </a>
                 <a href="/view/login.php" aria-label="Go login">
                     <span class="material-symbols-rounded">account_circle</span>
                 </a>

@@ -15,10 +15,18 @@ require_once "../controller/config.php";
 
 $path = "./public/uploads/" . basename($image);
 
-// Preparar la consulta SQL para insertar los datos en la tabla posts
-$sql_insertar_post = "INSERT INTO posts (title, content, imagen, materia, publictype, authorid) VALUES (?, ?, ?, ?, ?, ?)";
-$stmt_insertar_post = $link->prepare($sql_insertar_post);
-$stmt_insertar_post->bind_param("ssssss", $titulo, $contenido, $path, $materia, $publictype, $user_id);
+if (isset($_POST['image']) && !empty($_POST['image'])) {
+    // Preparar la consulta SQL para insertar los datos en la tabla posts
+    $sql_insertar_post = "INSERT INTO posts (title, content, imagen, materia, publictype, authorid) VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt_insertar_post = $link->prepare($sql_insertar_post);
+    $stmt_insertar_post->bind_param("ssssss", $titulo, $contenido, $path, $materia, $publictype, $user_id);
+} else {
+    $sql_insertar_post = "INSERT INTO posts (title, content, materia, publictype, authorid) VALUES (?, ?, ?, ?, ?)";
+    $stmt_insertar_post = $link->prepare($sql_insertar_post);
+    $stmt_insertar_post->bind_param("sssss", $titulo, $contenido, $materia, $publictype, $user_id);
+}
+
+
 
 // Ejecutar la consulta para insertar el post
 if ($stmt_insertar_post->execute()) {

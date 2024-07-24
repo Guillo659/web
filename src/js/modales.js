@@ -14,7 +14,7 @@ function toggleClassModal(clase = 'visible') {
             <article class="popup">
                 <section class="popup-bar-top">
                     <h1 class="title">Reportar publicación</h1>
-                    <button id="btn_close_report" onclick="toggleClassModal('visible',true)" aria-label="Close">
+                    <button id="btn_close_report" onclick="toggleClassModal('visible')" aria-label="Close">
                         <span aria-hidden="true" class="material-symbols-rounded">close</span>
                     </button>
                 </section>
@@ -50,6 +50,7 @@ function toggleClassModal(clase = 'visible') {
         modal_report.classList.toggle(clase);
         if (!modal_report.classList.contains('visible')) {
             id_post_report = null;
+            resetContentModal = false;
         }
         if (btn_send) {
             btn_send.addEventListener('click', crearReporte, false);

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="src/css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="src/js/script.js" defer></script>
+    <!-- <script src="src/js/script.js" defer></script> -->
 </head>
 
 <body>
@@ -19,10 +19,14 @@
         <header>
             <nav>
                 <img src="https://res.cloudinary.com/dvdhtdzwp/image/upload/c_crop,g_auto,h_800,w_800/logo.jpg" alt="icon page">
-                <div class="div-search">
-                    <span class="material-symbols-rounded">search</span>
-                    <input id="search" type="text" placeholder="Search">
-                    <div id="answer"></div>
+                <div class="div-search flex-column">
+                    <div class="criterio">
+                        <span class="material-symbols-rounded">search</span>
+                        <input id="search" type="text" placeholder="Search">
+                    </div>
+                    <div id="answer">
+                        <div class="container-answer"></div>
+                    </div>
                 </div>
             </nav>
         </header>
@@ -58,6 +62,7 @@
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['name'] = $row['name'];
                 $_SESSION['usuario_id'] = $row['id'];
+                $role = $row['role'];
                 if ($row['role']) {
                     $sudo = true;
                 }
@@ -177,7 +182,7 @@
                     if ($resultado->num_rows > 0) {
                         $counter = 0;
                     ?>
-                        <a href="#" class="selected">Para ti</a>
+                        <a href="#" data-materia="todas" class="selected">Para ti</a>
                     <?php
                         while ($fila = $resultado->fetch_assoc()) {
                             if ($fila['materia']) {
@@ -275,7 +280,12 @@
                                     <?php
                                     $tmp_art_id = $row['id'];
                                     if ($row["imagen"] != 0 && $row['imagen'] != "public/0") : ?>
-                                        <img class="art-img" src="<?= $row['imagen'] ?>" alt="Post image">
+                                        <?php $ruta = str_replace('..', '', $row['imagen']); ?>
+                                        <?php if (file_exists($ruta)) { ?>
+                                            <img class="art-img" src="<?= $ruta ?>" alt="Post image">
+                                        <?php } else { ?>
+                                            <img class="art-img" title="No se encontró el archivo" src="/public/images/img-load-failed.png" alt="Post image">
+                                        <?php } ?>
                                     <?php endif ?>
                                 </article>
                     <?php

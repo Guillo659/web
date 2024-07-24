@@ -1,5 +1,6 @@
 .container {
     width: 100%;
+    z-index: 1;
     height: calc(100vh - 60px);
     max-width: 1000px;
     padding: 0 20px;
@@ -7,17 +8,20 @@
     justify-content: center;
     scroll-behavior: smooth;
 }
-.container > section { 
+
+.container>section {
     height: inherit;
     padding-bottom: 60px;
     overflow-x: hidden;
     overflow-y: scroll;
     scroll-behavior: smooth;
 }
-.container > section:nth-child(2) {
+
+.container>section:nth-child(2) {
     display: none;
 }
-.container > section::-webkit-scrollbar {
+
+.container>section::-webkit-scrollbar {
     display: none;
 }
 
@@ -30,9 +34,10 @@
     overflow-x: auto;
     gap: 10px;
     position: relative;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     scrollbar-width: none;
 }
+
 .nav-categ::before {
     content: '';
     display: block;
@@ -42,6 +47,7 @@
     left: 0;
     background: linear-gradient( to right, var(--bg), #0000);
 }
+
 .nav-categ::after {
     content: '';
     display: block;
@@ -52,9 +58,11 @@
     background: linear-gradient( to right, var(--bg), #0000);
     scale: -1;
 }
+
 .nav-categ::-webkit-scrollbar {
     display: none;
 }
+
 .nav-categ a {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 500;
@@ -64,13 +72,16 @@
     border-radius: 30px;
     white-space: nowrap;
 }
+
 .nav-categ a:hover {
     background: var(--hover);
 }
+
 .nav-categ a:active {
     background: var(--color1);
     color: var(--color2);
 }
+
 .nav-categ a.selected {
     font-weight: bold;
     background: var(--title);
@@ -82,24 +93,30 @@ article.waiting {
     opacity: 0.5;
     pointer-events: none;
 }
+
 .article.deleted {
     transition: .3s ease
 }
+
 article.deleted {
     margin: 0;
     padding: 0;
     opacity: 0;
 }
-article.deleted > * {
+
+article.deleted>* {
     overflow: hidden
 }
 
-.article button, .post button {
+.article button,
+.post button {
     background-color: transparent;
     border-radius: 50%;
     aspect-ratio: 1/1;
 }
-.article button span, .post button span {
+
+.article button span,
+.post button span {
     font-weight: 400;
     font-size: 20px
 }
@@ -112,22 +129,26 @@ article.deleted > * {
     gap: 10px;
     position: relative;
 }
+
 .head-user img {
     height: 35px;
     aspect-ratio: 1/1;
     border-radius: 100%;
     object-fit: cover;
 }
+
 .user-date {
     display: flex;
     flex-direction: column;
     margin-top: -5px;
 }
+
 .user-date a {
     color: var(--title);
     font-weight: 700;
     white-space: nowrap;
 }
+
 .user-date span {
     width: fit-content;
     font-size: 80%;
@@ -137,9 +158,11 @@ article.deleted > * {
     white-space: nowrap;
     cursor: default;
 }
+
 .user-date span:hover {
     color: var(--color2)
 }
+
 .btn-more {
     margin-left: auto;
 }
@@ -149,7 +172,7 @@ article.deleted > * {
     display: flex;
     flex-direction: column;
     translate: -20px;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
@@ -180,6 +203,7 @@ article.deleted > * {
     -webkit-line-clamp: 4;
     overflow: hidden;
 }
+
 .art-text a[role="h1"] {
     color: var(--title);
     font-size: 1.5em;
@@ -188,6 +212,7 @@ article.deleted > * {
     display: block;
     text-wrap: balance;
 }
+
 .art-text a[role="p"] {
     font-size: 100%;
     font-weight: 400;
@@ -211,6 +236,7 @@ article.deleted > * {
     display: flex;
     margin-top: auto;
 }
+
 .art-ctg span {
     font-weight: 500;
     color: var(--bg);
@@ -227,7 +253,7 @@ article.deleted > * {
     display: flex;
     flex-direction: column;
     z-index: 96;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
@@ -271,6 +297,7 @@ article.deleted > * {
     display: flex;
     justify-content: space-between;
 }
+
 .post-rate-info button {
     font-size: 14px;
     height: auto;
@@ -278,13 +305,16 @@ article.deleted > * {
     display: block;
     aspect-ratio: 0;
 }
-.post-rate-info button:hover, .post-rate-info button:active {
+
+.post-rate-info button:hover,
+.post-rate-info button:active {
     background: transparent;
 }
 
 .post-like-counter::after {
     content: ' Likes';
 }
+
 .post-comment-counter::after {
     content: ' Comentarios';
 }
@@ -295,11 +325,13 @@ article.deleted > * {
     display: flex;
     gap: 10px;
 }
+
 .post-rate-buttons button {
     height: 35px;
     border-radius: 20px;
     flex: 1;
 }
+
 .post-rate-buttons button:disabled {
     opacity: 1 !important;
 }
@@ -309,11 +341,13 @@ article.deleted > * {
     height: 0;
     transition: .1s ease;
 }
+
 .post-add-comment.visible {
     margin-top: 10px;
     height: 35px;
     overflow: visible;
 }
+
 .post-add-comment form {
     height: 100%;
     display: flex;
@@ -328,19 +362,23 @@ article.deleted > * {
     gap: 10px;
     position: relative;
 }
-.comment > img {
+
+.comment>img {
     width: 32px;
     height: 32px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .comment button {
     margin-left: auto;
     padding: 0;
 }
+
 .comment button span {
     font-size: 80%;
 }
+
 .comment-content {
     background: var(--border);
     padding: 10px 20px;
@@ -348,22 +386,27 @@ article.deleted > * {
     display: flex;
     flex-direction: column;
 }
+
 .comment-content p {
     width: 100%;
-    max-width: calc(600px - 124px); /*Menos el padding de todas las cajas, el gap y el ancho de la imagen*/
+    max-width: calc(600px - 124px);
+    /*Menos el padding de todas las cajas, el gap y el ancho de la imagen*/
     overflow-wrap: break-word;
     text-overflow: ellipsis;
     overflow: hidden;
 }
+
 .comment-author a {
     color: var(--title);
     font-weight: 500;
 }
+
 .comment-author span {
     font-size: 80%;
     color: var(--text);
     cursor: default;
 }
+
 .comment-author span:hover {
     color: var(--color2);
 }
@@ -388,16 +431,16 @@ article.deleted > * {
     .container::-webkit-scrollbar {
         display: none;
     }
-    .container > section {
+    .container>section {
         min-width: 100vw;
         scroll-snap-align: center;
     }
-    .container > section:first-child {
+    .container>section:first-child {
         padding-bottom: 60px;
         position: sticky;
         left: 0;
     }
-    .container > section:nth-child(2) {
+    .container>section:nth-child(2) {
         display: flex;
     }
     .estudios {
@@ -417,9 +460,10 @@ article.deleted > * {
         max-height: 60vh
     }
     .comment-content p {
-        max-width: calc(100vw - 124px); 
+        max-width: calc(100vw - 124px);
     }
 }
+
 @media screen and (max-width: 600px) {
     .article {
         height: auto;

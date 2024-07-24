@@ -181,8 +181,39 @@ textarea::-webkit-scrollbar {
     display: flex;
     align-items: center;
     border-radius: 20px;
+    padding: 10px;
 }
 
+.div-search.flex-column {
+    flex-direction: column;
+}
+
+.div-search>.criterio {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+}
+
+#answer {
+    position: relative;
+    z-index: 9999;
+    height: 75vh;
+    max-height: 95vh;
+    top: 10px;
+    background: #000000;
+    border-radius: 12px;
+}
+
+#answer>.container-answer {
+    padding-top: 4px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.div-search>.criterio span,
 .div-search span {
     color: var(--text);
     height: 100%;
@@ -191,6 +222,7 @@ textarea::-webkit-scrollbar {
     place-content: center;
 }
 
+.div-search>.criterio input,
 .div-search input {
     font-weight: 600;
     background: #0000;
@@ -202,6 +234,10 @@ textarea::-webkit-scrollbar {
     border: none;
     outline: none;
     transition: width .3s ease
+}
+
+#answer span {
+    color: var(--bg);
 }
 
 .nav-tools {
@@ -382,18 +418,21 @@ textarea::-webkit-scrollbar {
     scroll-behavior: smooth;
 }
 
-.popup-content::-webkit-scrollbar {
+.popup-content::-webkit-scrollbar,
+#answer>.container-answer::-webkit-scrollbar {
     background: var(--bg);
     width: 8px;
 }
 
-.popup-content::-webkit-scrollbar-thumb {
+.popup-content::-webkit-scrollbar-thumb,
+#answer>.container-answer::-webkit-scrollbar-thumb {
     background: var(--scroll);
     border-radius: 10px;
     cursor: pointer;
 }
 
-.popup-content::-webkit-scrollbar-thumb:hover {
+.popup-content::-webkit-scrollbar-thumb:hover,
+#answer>.container-answer::-webkit-scrollbar-thumb:hover {
     background: var(--text)
 }
 

@@ -105,11 +105,12 @@ async function buscarReportesByPosts(post = null, notificacion_id = null) {
                         visible = data.data[0].post_visibility;
                     }
                     //Cambiamos el titulo del modal
-                    modal_report.querySelector('h1.title').textContent = 'Reportes del post';
+                    modal_report.querySelector('.popup>.popup-bar-top>h1.title').textContent = 'Reportes del post';
                     //Limpiamos el contenido del modal
-                    modal_report.querySelector('.popup-content').innerHTML = '';
+                    modal_report.querySelector('.popup>.popup-content').innerHTML = '';
                     //Limpiamos las acciones del modal
-                    modal_report.querySelector('.popup-bar-bottom').innerHTML = '';
+                    modal_report.querySelector('.popup>.popup-bar-bottom').innerHTML = '';
+                    console.log(modal_report);
                     //Agregamos los reportes al modal
                     data.data.forEach(async reporte => {
                         let rutaImg = 'null';
@@ -143,7 +144,9 @@ async function buscarReportesByPosts(post = null, notificacion_id = null) {
                     </div>
                     `;
                     //Mostramos el modal
+                    //Para reiniciar el contenido del modal cuándo se cierre
                     toggleClassModal('visible');
+                    resetContentModal = true;
                 }
 
             }).catch(error => {
@@ -162,6 +165,7 @@ async function checkFileExists(url = null) {
     if (url != null) {
         return await fetch(url, {
             method: 'HEAD',
+            mode: 'no-cors'
         }).then(response => {
             return response.ok;
         }).catch(() => {

@@ -13,7 +13,7 @@ $materia = $_POST['materia'];
 // Conectar a la base de datos (reemplaza con tus credenciales)
 require_once "../controller/config.php";
 
-$path = $image;
+$path = "./public/uploads/" . basename($image);
 
 // Preparar la consulta SQL para insertar los datos en la tabla posts
 $sql_insertar_post = "INSERT INTO posts (title, content, imagen, materia, publictype, authorid) VALUES (?, ?, ?, ?, ?, ?)";

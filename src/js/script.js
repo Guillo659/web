@@ -549,7 +549,7 @@ document.addEventListener('DOMContentLoaded', async() => {
         <section class="popup-bar-bottom">
             <div role="form" class="popup-form-buttons">
                 <label role="input" id="input-post-img">
-                    <input type="file" name="img-post">
+                    <input type="file" name="img-post" accept="image/*">
                     <span aria-hidden="true" class="material-symbols-rounded">image</span>
                 </label>
                 <button disabled aria-label="Submit" type="submit">Publicar</button>
@@ -646,28 +646,32 @@ document.addEventListener('DOMContentLoaded', async() => {
             return
         }
 
+        const extAllowed = ['image/jpg', 'image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         let file = this.files[0]
-        let formData = new FormData()
-        formData.append('imagen', file)
+        if (extAllowed.includes(file.type)) {
+            let formData = new FormData()
+            formData.append('imagen', file)
+            let xhr = new XMLHttpRequest();
 
-        let xhr = new XMLHttpRequest();
+            xhr.open('POST', PATH + 'model/set_image_post.php')
 
-        xhr.open('POST', PATH + 'model/set_image_post.php')
-
-        xhr.onload = () => {
-            if (xhr.status === 200) {
-                cache.modal.formImg.src = PATH + xhr.response
-                cache.modal.formImg.style.display = 'block'
-            } else {
-                console.error('Error al cargar la imagen:', xhr.statusText)
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    cache.modal.formImg.src = PATH + xhr.response
+                    cache.modal.formImg.style.display = 'block'
+                } else {
+                    console.error('Error al cargar la imagen:', xhr.statusText)
+                }
             }
-        }
 
-        xhr.onerror = () => {
-            console.error('Error de red al cargar la imagen')
-        }
+            xhr.onerror = () => {
+                console.error('Error de red al cargar la imagen')
+            }
 
-        xhr.send(formData)
+            xhr.send(formData)
+        }
+        return alert('Archivo no permitido');
+
     }
     if (inputFileProfile) {
         inputFileProfile.onchange = function() {

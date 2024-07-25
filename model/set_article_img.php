@@ -33,7 +33,7 @@ function uploadByFile($file) {
             case IMAGETYPE_GIF:
                 $imagen = imagecreatefromgif($imagen_original);
                 break;
-            // Puedes agregar otros tipos de imagen según sea necesario
+                // Puedes agregar otros tipos de imagen según sea necesario
             default:
                 // Si el tipo de imagen no es compatible, eliminamos el archivo y retornamos un mensaje de error
                 unlink($imagen_original);
@@ -103,7 +103,7 @@ function uploadByUrl($requestData) {
                 case IMAGETYPE_GIF:
                     $imagen = imagecreatefromgif($imagen_original);
                     break;
-                // Puedes agregar otros tipos de imagen según sea necesario
+                    // Puedes agregar otros tipos de imagen según sea necesario
                 default:
                     // Si el tipo de imagen no es compatible, eliminamos el archivo y retornamos un mensaje de error
                     unlink($imagen_original);
@@ -179,7 +179,7 @@ function uploadByFormData($file) {
             case IMAGETYPE_GIF:
                 $imagen = imagecreatefromgif($imagen_original);
                 break;
-            // Puedes agregar otros tipos de imagen según sea necesario
+                // Puedes agregar otros tipos de imagen según sea necesario
             default:
                 // Si el tipo de imagen no es compatible, eliminamos el archivo y retornamos un mensaje de error
                 unlink($imagen_original);
@@ -249,4 +249,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Devuelve la respuesta en formato JSON
 header('Content-Type: application/json');
 echo json_encode($response);
-?>

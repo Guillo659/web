@@ -171,7 +171,7 @@ if (isset($_GET['id']) && $_GET['id']) {
                                 </section>
                                 <?php
                                  if ($row["imagen"] != 0 && $row['imagen'] != "public/0") : ?>
-                                    <img class="art-img" src="<?= $row['imagen'] ?>" alt="Post image">
+                                    <img class="art-img" src="../<?= $row['imagen'] ?>" alt="Post image">
                                 <?php endif ?>
                             </article> 
                             <?php

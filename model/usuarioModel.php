@@ -11,7 +11,7 @@ class UsuarioModel {
         try {
             $name = cleanInput($_POST['name']);
             global $link;
-            $sql = "SELECT username, password FROM usuarios WHERE name =?;";
+            $sql = "SELECT username, password FROM usuarios WHERE BINARY name =?;";
             $stmt = mysqli_prepare($link, $sql);
             mysqli_stmt_bind_param($stmt, "s", $name);
             mysqli_stmt_execute($stmt);

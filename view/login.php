@@ -38,7 +38,7 @@ if ($_SESSION['username'] != "none") {
 
                 <button type="submit">Iniciar sesión</button>
             </form>
-            <a href="register.php">¿No tienes una cuenta?</a>
+            <a onclick="alert('No te tocaba we, ni modos')">¿No tienes una cuenta?</a>
         </article>
     </main>
 </body>
